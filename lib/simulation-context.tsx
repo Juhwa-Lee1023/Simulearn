@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState, ReactNode, useCallback, useEffect, useRef } from 'react';
+import { toast } from 'sonner';
 
 // --- Types ---
 export type Job = 'Planner' | 'Marketer' | 'Designer';
@@ -321,7 +322,7 @@ export function SimulationProvider({ children }: { children: ReactNode }) {
     if (msg.senderId !== 'user' && msg.senderId !== 'system') {
       const sender = TEAM_PERSONAS.find(p => p.id === msg.senderId);
       if (sender) {
-        console.log(`${sender.role}님의 메시지`, {
+        toast.message(`${sender.role}님의 메시지`, {
           description: "피드백이 도착했습니다. 확인해보세요.",
         });
       }

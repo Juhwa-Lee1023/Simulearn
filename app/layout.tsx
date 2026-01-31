@@ -3,6 +3,7 @@ import { DM_Mono, Fraunces, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/providers";
 import { MainLayout } from "@/components/layout/main-layout";
+import { Toaster } from "sonner";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -39,6 +40,7 @@ export default function RootLayout({
           <MainLayout>
             {children}
           </MainLayout>
+          <Toaster position="top-center" richColors />
         </Providers>
       </body>
     </html>
