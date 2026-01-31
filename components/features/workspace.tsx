@@ -7,9 +7,16 @@ import { Sidebar } from './workspace/sidebar';
 import { motion, AnimatePresence } from 'motion/react';
 import { Button } from '@/components/ui/button';
 import { CheckCircle, ArrowRight } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 export function Workspace() {
   const { showSuccessPopup, closeSuccessPopup } = useSimulation();
+  const router = useRouter();
+
+  const handleViewAppPreview = () => {
+    closeSuccessPopup();
+    router.push('/app-preview');
+  };
 
   return (
     <div className="flex h-full w-full bg-gray-50 overflow-hidden">
@@ -50,8 +57,8 @@ export function Workspace() {
                 완성된 앱 화면을 확인해보세요.
               </p>
               <Button
-                className="w-full min-w-[200px] min-h-14 text-lg rounded-full font-bold flex items-center justify-center gap-2 transition-colors bg-gray-900 hover:bg-gray-800 text-white"
-                onClick={closeSuccessPopup}
+                className="w-full min-w-[200px] min-h-14 px-8 py-4 text-lg rounded-full font-bold flex items-center justify-center gap-2 transition-colors bg-gray-900 hover:bg-gray-800 text-white"
+                onClick={handleViewAppPreview}
               >
                 완성된 앱 화면 보기 <ArrowRight className="w-5 h-5 shrink-0" />
               </Button>

@@ -212,7 +212,8 @@ export const TEAM_PERSONAS: Persona[] = [
 async function fetchFeedbackWithRetry(
   prdContent: string,
   reviewStage: ReviewStage,
-  stageAttempts: number
+  stageAttempts: number,
+  missionDifficulty: MissionDifficulty
 ): Promise<FeedbackResponse> {
   let lastError: Error | null = null;
 
@@ -224,7 +225,7 @@ async function fetchFeedbackWithRetry(
       const response = await fetch('/api/feedback', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prdContent, reviewStage, stageAttempts }),
+        body: JSON.stringify({ prdContent, reviewStage, stageAttempts, missionDifficulty }),
         cache: 'no-store',
         signal: controller.signal,
       });
@@ -263,7 +264,7 @@ export function SimulationProvider({ children }: { children: ReactNode }) {
   const [reviewStage, setReviewStage] = useState<ReviewStage>('designer');
   const [stageAttempts, setStageAttempts] = useState<number>(0);
   const [job, setJob] = useState<Job | null>(null);
-  const [missionDifficulty, setMissionDifficulty] = useState<MissionDifficulty>('normal');
+  const [missionDifficulty, setMissionDifficulty] = useState<MissionDifficulty>('easy');
   const [messages, setMessages] = useState<Message[]>([]);
   const [prdContent, setPrdContent] = useState<string>(DEFAULT_PRD);
   const [mentalGauge, setMentalGauge] = useState(DEFAULT_MENTAL);
@@ -381,7 +382,7 @@ export function SimulationProvider({ children }: { children: ReactNode }) {
         let usedFallback = false;
 
         try {
-          feedback = await fetchFeedbackWithRetry(prdContent, reviewStage, stageAttempts);
+          feedback = await fetchFeedbackWithRetry(prdContent, reviewStage, stageAttempts, missionDifficulty);
         } catch {
           usedFallback = true;
           feedback = {
@@ -438,7 +439,7 @@ export function SimulationProvider({ children }: { children: ReactNode }) {
     } finally {
       setIsReviewing(false);
     }
-  }, [isReviewing, step, reviewStage, prdContent, stageAttempts, addMessage, reduceMental, restoreMental, triggerHelp]);
+  }, [isReviewing, step, reviewStage, prdContent, stageAttempts, missionDifficulty, addMessage, reduceMental, restoreMental, triggerHelp]);
 
   const closeSuccessPopup = useCallback(() => {
     setShowSuccessPopup(false);

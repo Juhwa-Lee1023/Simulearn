@@ -8,10 +8,13 @@ export const runtime = "nodejs";
 
 type ReviewStage = 'designer' | 'developer' | 'qa';
 
+type MissionDifficulty = 'easy' | 'normal' | 'hard';
+
 interface FeedbackRequest {
   prdContent: string;
   reviewStage: ReviewStage;
   stageAttempts: number;
+  missionDifficulty?: MissionDifficulty;
   chatHistory?: Array<{ role: string; content: string }>;
 }
 
@@ -37,7 +40,7 @@ const PERSONA_CONFIGS: Record<ReviewStage, {
 당신의 역할:
 - 서비스 기획자가 작성한 PRD(기획안)를 검토합니다
 - UI/UX 관점에서 부족한 점을 지적합니다
-- 반말로, 친근하지만 전문적으로 피드백합니다
+- 존댓말로, 친근하지만 전문적으로 피드백합니다
 
 검토 기준:
 1. 버튼, 텍스트, UI 요소의 위치/문구가 명시되어 있는가?
@@ -50,7 +53,7 @@ const PERSONA_CONFIGS: Record<ReviewStage, {
 - 통과: "PASS:" 로 시작, 짧은 칭찬 메시지
 - 불통과: "FAIL:" 로 시작, 구체적인 UI/UX 관련 피드백
 
-반드시 "PASS:" 또는 "FAIL:"로 시작해야 합니다. 2-3문장으로 간결하게 응답하세요. 한국어로 답변하세요.`,
+반드시 "PASS:" 또는 "FAIL:"로 시작해야 합니다. 2-3문장으로 간결하게 응답하세요. 한국어로 존댓말로 답변하세요.`,
     passCondition: 'UI 요소(버튼, 문구, 화면)에 대한 설명이 충분한가'
   },
   developer: {
@@ -62,7 +65,7 @@ const PERSONA_CONFIGS: Record<ReviewStage, {
 당신의 역할:
 - 서비스 기획자가 작성한 PRD(기획안)를 기술적 관점에서 검토합니다
 - 예외 처리, API 에러 핸들링 등 개발 구현 시 필요한 정보를 요구합니다
-- 반말로, 직설적이지만 건설적으로 피드백합니다
+- 존댓말로, 직설적이지만 건설적으로 피드백합니다
 
 검토 기준:
 1. API 실패, 타임아웃 등 예외 상황 처리가 명시되어 있는가?
@@ -75,7 +78,7 @@ const PERSONA_CONFIGS: Record<ReviewStage, {
 - 통과: "PASS:" 로 시작, 짧은 승인 메시지
 - 불통과: "FAIL:" 로 시작, 구체적인 기술적 피드백
 
-반드시 "PASS:" 또는 "FAIL:"로 시작해야 합니다. 2-3문장으로 간결하게 응답하세요. 한국어로 답변하세요.`,
+반드시 "PASS:" 또는 "FAIL:"로 시작해야 합니다. 2-3문장으로 간결하게 응답하세요. 한국어로 존댓말로 답변하세요.`,
     passCondition: '예외 처리와 에러 핸들링이 충분히 정의되어 있는가'
   },
   qa: {
@@ -87,7 +90,7 @@ const PERSONA_CONFIGS: Record<ReviewStage, {
 당신의 역할:
 - 서비스 기획자가 작성한 PRD(기획안)를 QA 관점에서 검토합니다
 - 테스트 가능한 인수 기준(Acceptance Criteria)이 있는지 확인합니다
-- 반말로, 친절하지만 엄격하게 피드백합니다
+- 존댓말로, 친절하지만 엄격하게 피드백합니다
 
 검토 기준:
 1. "~하면 ~해야 한다" 형태의 테스트 케이스가 있는가?
@@ -100,7 +103,7 @@ const PERSONA_CONFIGS: Record<ReviewStage, {
 - 통과: "PASS:" 로 시작, 짧은 승인 메시지
 - 불통과: "FAIL:" 로 시작, 구체적인 테스트 관련 피드백
 
-반드시 "PASS:" 또는 "FAIL:"로 시작해야 합니다. 2-3문장으로 간결하게 응답하세요. 한국어로 답변하세요.`,
+반드시 "PASS:" 또는 "FAIL:"로 시작해야 합니다. 2-3문장으로 간결하게 응답하세요. 한국어로 존댓말로 답변하세요.`,
     passCondition: '테스트 가능한 인수 기준이 명확하게 정의되어 있는가'
   }
 };
@@ -123,7 +126,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
   }
 
-  const { prdContent, reviewStage, stageAttempts } = body;
+  const { prdContent, reviewStage, stageAttempts, missionDifficulty = 'normal' } = body;
 
   if (!prdContent || !reviewStage) {
     return NextResponse.json(
@@ -140,6 +143,26 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  // Difficulty-based instructions
+  const difficultyInstructions = {
+    easy: `
+
+[난이도: 쉬움]
+- 기획안에 최소한의 내용만 있어도 관대하게 통과시켜주세요.
+- 핵심 아이디어가 담겨있다면 세부사항이 부족해도 PASS 해주세요.
+- 피드백은 격려 위주로, 부족한 점은 부드럽게 제안하세요.
+- 2번 이상 시도했다면 거의 무조건 통과시켜주세요.`,
+    normal: '',
+    hard: `
+
+[난이도: 어려움]
+- 매우 엄격하게 검토하세요. 완벽에 가까워야만 통과입니다.
+- 사소한 누락이나 모호함도 지적하세요.
+- 실제 현업 수준의 완성도를 요구하세요.`
+  };
+
+  const difficultyNote = difficultyInstructions[missionDifficulty] || '';
+
   const userMessage = stageAttempts > 0
     ? `[재검토 요청 - ${stageAttempts + 1}번째 시도]
 
@@ -149,14 +172,14 @@ export async function POST(req: NextRequest) {
 ${prdContent}
 ---
 
-이전보다 나아졌다면 통과시켜주고, 여전히 부족하다면 다른 관점에서 피드백을 주세요.`
+이전보다 나아졌다면 통과시켜주고, 여전히 부족하다면 다른 관점에서 피드백을 주세요.${difficultyNote}`
     : `아래는 기획자가 작성한 PRD(기획안)입니다. ${persona.role} 관점에서 검토해주세요.
 
 ---
 ${prdContent}
 ---
 
-${persona.passCondition}`;
+${persona.passCondition}${difficultyNote}`;
 
   trackApiRequest('feedback');
   
