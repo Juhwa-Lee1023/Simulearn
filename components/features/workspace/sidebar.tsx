@@ -1,16 +1,36 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSimulation } from '@/lib/simulation-context';
 import { Button } from '@/components/ui/button';
 import { Lightbulb, Info, Sparkles, BookOpen, CheckSquare, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
+const QA_TAP_COUNT = 5;
+const QA_TAP_TIMEOUT = 1500;
+
 export function Sidebar() {
-  const { step, helpTip, triggerHelp } = useSimulation();
+  const { step, helpTip, triggerHelp, devSkipStage } = useSimulation();
   const [isTipVisible, setIsTipVisible] = useState(false);
+  const tapCountRef = useRef(0);
+  const tapTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   const handleTriggerHelp = () => {
+    tapCountRef.current += 1;
+    
+    if (tapTimerRef.current) {
+      clearTimeout(tapTimerRef.current);
+    }
+    
+    if (tapCountRef.current >= QA_TAP_COUNT) {
+      devSkipStage();
+      tapCountRef.current = 0;
+    } else {
+      tapTimerRef.current = setTimeout(() => {
+        tapCountRef.current = 0;
+      }, QA_TAP_TIMEOUT);
+    }
+    
     triggerHelp();
     setIsTipVisible(true);
   };

@@ -75,6 +75,7 @@ interface SimulationContextType extends SimulationState {
   triggerHelp: () => void;
   closeSuccessPopup: () => void;
   resetSimulation: () => void;
+  devSkipStage: () => void;
 }
 
 // --- Constants ---
@@ -463,6 +464,18 @@ export function SimulationProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
+  const devSkipStage = useCallback(() => {
+    if (reviewStage === 'designer') {
+      setReviewStage('developer');
+    } else if (reviewStage === 'developer') {
+      setReviewStage('qa');
+    } else if (reviewStage === 'qa') {
+      setReviewStage('done');
+      setShowSuccessPopup(true);
+    }
+    setStageAttempts(0);
+  }, [reviewStage]);
+
   return (
     <SimulationContext.Provider value={{
       step, setStep,
@@ -478,7 +491,8 @@ export function SimulationProvider({ children }: { children: ReactNode }) {
       showSuccessPopup, closeSuccessPopup,
       helpTip, triggerHelp,
       submitPrd, resetSimulation,
-      isReviewing
+      isReviewing,
+      devSkipStage
     }}>
       {children}
     </SimulationContext.Provider>
