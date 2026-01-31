@@ -84,7 +84,7 @@ const MAX_RETRIES = 2;
 const RETRY_DELAYS = [300, 800];
 const STORAGE_KEY = 'simulearn_state';
 const STORAGE_VERSION = 1;
-const DEFAULT_PRD = '# 두쫀쿠 소진 시점 판매 임박 매장 강조\n\n## 목표\n\n## 상세 정책\n\n';
+const DEFAULT_PRD = '# 두쫀쿠 소진 시점 매진 임박 매장 강조\n\n## 목표\n\n## 상세 정책\n\n';
 
 interface PersistedState {
   version: number;
@@ -344,7 +344,7 @@ export function SimulationProvider({ children }: { children: ReactNode }) {
         tip = {
           title: "디자이너를 위한 기획",
           concept: "디자이너는 '데이터'보다 '화면'을 그립니다.",
-          guide: "지도/리스트에서 판매 임박 매장을 어떻게 강조할지 구체적으로 묘사해주세요. 예: '판매 임박 매장에 빨간 배지 노출', '매장 카드에 남은 수량 표시'"
+          guide: "지도/리스트에서 매진 임박 매장을 어떻게 강조할지 구체적으로 묘사해주세요. 예: '매진 임박 매장에 빨간 배지 노출', '매장 카드에 남은 수량 표시'"
         };
       } else if (reviewStage === 'developer') {
         tip = {
@@ -356,14 +356,14 @@ export function SimulationProvider({ children }: { children: ReactNode }) {
         tip = {
           title: "QA를 위한 인수 기준",
           concept: "기능이 완료되었다고 판단하는 기준(Acceptance Criteria)이 필요합니다.",
-          guide: "예: '재고 10% 이하 → 판매 임박 강조', '재고 0% → 품절 표시 및 강조 해제' 처럼 케이스별 예상 결과를 명시하세요."
+          guide: "예: '재고 10% 이하 → 매진 임박 강조', '재고 0% → 품절 표시 및 강조 해제' 처럼 케이스별 예상 결과를 명시하세요."
         };
       }
     } else {
       tip = {
         title: "명확한 의사결정",
         concept: "개발자는 A안과 B안 중 하나를 확정해주길 원합니다.",
-        guide: "판매 임박 강조를 지도에서만 할지, 리스트에서도 할지 결정해서 알려주세요."
+        guide: "매진 임박 강조를 지도에서만 할지, 리스트에서도 할지 결정해서 알려주세요."
       };
     }
 

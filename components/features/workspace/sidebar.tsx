@@ -128,7 +128,7 @@ export function Sidebar() {
               <div className="p-4 bg-gray-50 rounded-xl border border-gray-100 hover:border-gray-300 transition-colors">
                 <h4 className="font-bold text-gray-900 text-sm mb-1">2. 유저 플로우(Flow)</h4>
                 <p className="text-xs text-gray-600 break-keep leading-relaxed">
-                  지도 진입 &rarr; 매장 재고 조회 &rarr; 판매 임박 매장 강조 &rarr; 사용자 노출 순서를 그려보세요.
+                  지도 진입 &rarr; 매장 재고 조회 &rarr; 매진 임박 매장 강조 &rarr; 사용자 노출 순서를 그려보세요.
                 </p>
               </div>
               <div className="p-4 bg-gray-50 rounded-xl border border-gray-100 hover:border-gray-300 transition-colors">

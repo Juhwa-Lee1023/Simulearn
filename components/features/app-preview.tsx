@@ -35,7 +35,7 @@ export function AppPreview() {
         >
           <h1 className="text-4xl font-bold text-gray-900 mb-2">당신의 기획안으로 만든 앱</h1>
           <p className="text-gray-500 break-keep">
-            팀이 기획안을 반영해 구현한, 두쫀쿠 소진 시점에 판매 임박 매장을 강조하는 화면입니다.
+            팀이 기획안을 반영해 구현한, 두쫀쿠 소진 시점에 매진 임박 매장을 강조하는 화면입니다.
           </p>
         </motion.div>
 
@@ -49,7 +49,7 @@ export function AppPreview() {
           {/* App header */}
           <div className="bg-gray-50 border-b border-gray-200 px-4 py-3 flex items-center gap-2">
             <MapPin className="w-5 h-5 text-gray-600" />
-            <span className="font-bold text-gray-900">판매 임박 매장</span>
+            <span className="font-bold text-gray-900">매진 임박 매장</span>
           </div>
 
           {/* Map area - 세로 절반 높이 */}

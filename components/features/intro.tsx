@@ -29,7 +29,7 @@ export function Intro() {
     addMessage({
       id: 'msg-boss-init',
       senderId: 'biz-lead',
-      text: '두쫀쿠가 다 떨어지는 시점에 판매 임박 매장을 더 강조하는 기능을 개발하려고 합니다. 기획안을 작성해주세요.',
+      text: '두쫀쿠가 다 떨어지는 시점에 매진 임박 매장을 더 강조하는 기능을 개발하려고 합니다. 기획안을 작성해주세요.',
       timestamp: new Date(),
       type: 'mission'
     });
@@ -51,7 +51,7 @@ export function Intro() {
           </span>
           <h1 className="text-5xl font-bold">당신의 미션</h1>
           <p className="text-base text-zinc-400 max-w-2xl mx-auto break-keep leading-relaxed">
-            두쫀쿠가 다 떨어지는 시점에 판매 임박 매장을 더 강조하는 기능을 기획하세요.
+            두쫀쿠가 다 떨어지는 시점에 매진 임박 매장을 더 강조하는 기능을 기획하세요.
             팀원들과 협업하여 예외 상황을 처리하고 완성도 높은 기획안(PRD)을 만들어야 합니다.
           </p>
         </motion.div>
