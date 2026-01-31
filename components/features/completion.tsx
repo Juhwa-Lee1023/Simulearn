@@ -13,7 +13,8 @@ const cards = [
     desc: "서비스 기획 실무 방법론을 깊이 있게 배워보세요.", 
     color: "bg-blue-50 text-blue-600",
     iconBg: "#D0E4F8",
-    iconColor: "#2956CA"
+    iconColor: "#2956CA",
+    href: "https://fastcampus.co.kr"
   },
   { 
     icon: Users, 
@@ -21,7 +22,8 @@ const cards = [
     desc: "시니어 PM에게 1:1로 멘토링을 받아보세요.", 
     color: "bg-purple-50 text-purple-600",
     iconBg: "#E0E7FF",
-    iconColor: "#6366F1"
+    iconColor: "#6366F1",
+    href: "https://www.linkedin.com"
   },
   { 
     icon: Briefcase, 
@@ -29,7 +31,8 @@ const cards = [
     desc: "준비가 되셨나요? 지금 바로 지원해보세요.", 
     color: "bg-green-50 text-green-600",
     iconBg: "#E5F19A",
-    iconColor: "#9ED28B"
+    iconColor: "#9ED28B",
+    href: "https://jasoseol.com"
   },
 ];
 
@@ -60,7 +63,7 @@ export function Completion() {
                     transition={{ delay: i * 0.1 }}
                     className="h-full"
                 >
-                    <button type="button" className="w-full text-left h-full group">
+                    <a href={c.href} target="_blank" rel="noopener noreferrer" className="w-full text-left h-full group block">
                         <Card className="h-full hover:shadow-xl transition-all border-gray-200 group-hover:border-gray-400 flex flex-col p-6">
                             <div 
                                 className="w-14 h-14 rounded-xl flex items-center justify-center mb-6"
@@ -75,7 +78,7 @@ export function Completion() {
                                 {c.desc}
                             </p>
                         </Card>
-                    </button>
+                    </a>
                 </motion.div>
             ))}
         </div>
