@@ -4,6 +4,7 @@ import { useSimulation } from '@/lib/simulation-context';
 import { Button } from '@/components/ui/button';
 import { MapPin, ArrowRight } from 'lucide-react';
 import { motion } from 'motion/react';
+import { useRouter } from 'next/navigation';
 
 type Store = {
   id: string;
@@ -24,6 +25,7 @@ const DUJJONKU_IMAGE = '/ddujjonku.png';
 
 export function AppPreview() {
   const { setStep } = useSimulation();
+  const router = useRouter();
 
   return (
     <div className="flex flex-col items-center justify-center h-full w-full bg-white p-8 overflow-y-auto">
@@ -157,7 +159,10 @@ export function AppPreview() {
           <Button
             size="lg"
             className="min-h-12 px-8 text-lg bg-gray-900 hover:bg-gray-800 text-white rounded-xl flex items-center gap-2"
-            onClick={() => setStep('completion')}
+            onClick={() => {
+              setStep('completion');
+              router.push('/completion');
+            }}
           >
             시뮬레이션 완료하기 <ArrowRight className="w-5 h-5" />
           </Button>
