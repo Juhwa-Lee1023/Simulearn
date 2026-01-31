@@ -118,7 +118,7 @@ export function Editor() {
         <Button 
           onClick={submitPrd} 
           disabled={isReviewing}
-          className="flex items-center gap-2 bg-gray-900 hover:bg-gray-700 text-white transition-all disabled:opacity-80 disabled:cursor-not-allowed"
+          className="flex items-center gap-2 bg-gray-900 hover:bg-gray-700 text-white py-3 px-6 min-w-fit transition-all disabled:opacity-80 disabled:cursor-not-allowed"
           size="md"
         >
           {isReviewing ? (
