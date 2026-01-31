@@ -27,6 +27,7 @@ export type Step =
   | 'difficulty-selection'
   | 'intro'             
   | 'level-1-task'      
+  | 'level-2-dev-inquiry'
   | 'app-preview'
   | 'completion';       
 
