@@ -25,18 +25,18 @@ export function JobSelection() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-full w-full bg-zinc-950 p-8 text-white overflow-y-auto">
+    <div className="flex flex-col items-center justify-center h-full w-full bg-zinc-950 p-4 md:p-8 text-white overflow-y-auto">
       <div className="max-w-5xl w-full flex flex-col h-full justify-center">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center space-y-4 mb-12 shrink-0"
+          className="text-center space-y-4 mb-8 md:mb-12 shrink-0"
         >
           <span className="inline-block px-3 py-1 rounded-full border border-zinc-700 text-zinc-400 text-xs font-bold uppercase tracking-wider">
             시뮬레이션
           </span>
-          <h1 className="text-5xl font-bold">Simulearn</h1>
-          <p className="text-base text-zinc-400 max-w-2xl mx-auto break-keep">
+          <h1 className="text-3xl md:text-5xl font-bold">Simulearn</h1>
+          <p className="text-sm md:text-base text-zinc-400 max-w-2xl mx-auto break-keep">
             커리어를 선택하여 시뮬레이션을 시작하세요.
           </p>
         </motion.div>
@@ -47,7 +47,7 @@ export function JobSelection() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.1 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16 shrink-0"
+          className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-8 md:mb-16 shrink-0"
         >
           {jobs.map((role) => (
             <motion.button
@@ -57,7 +57,7 @@ export function JobSelection() {
               whileTap={!role.disabled ? { scale: 0.98 } : {}}
               onClick={() => !role.disabled && setJob(role.id as Job)}
               className={`
-                relative flex flex-col items-center justify-center p-8 rounded-xl text-center transition-all h-72
+                relative flex flex-col items-center justify-center p-6 md:p-8 rounded-xl text-center transition-all h-auto min-h-[180px] md:h-72
                 ${job === role.id 
                   ? 'bg-zinc-800 border-2 shadow-xl shadow-black/20' 
                   : 'bg-zinc-900 border border-zinc-800 hover:bg-zinc-800 hover:border-zinc-700'
@@ -67,12 +67,12 @@ export function JobSelection() {
               style={!role.disabled && job === role.id ? { borderColor: '#2956CA' } : undefined}
             >
               <div 
-                className={`p-4 rounded-full mb-6 transition-colors shrink-0 ${!role.disabled && job === role.id ? '' : 'bg-zinc-800 text-zinc-300 border border-zinc-700'}`}
+                className={`p-3 md:p-4 rounded-full mb-4 md:mb-6 transition-colors shrink-0 ${!role.disabled && job === role.id ? '' : 'bg-zinc-800 text-zinc-300 border border-zinc-700'}`}
                 style={!role.disabled && job === role.id ? { backgroundColor: '#2956CA', color: '#fff' } : undefined}
               >
-                <role.icon className="w-8 h-8" />
+                <role.icon className="w-6 h-6 md:w-8 md:h-8" />
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">{role.label}</h3>
+              <h3 className="text-lg md:text-xl font-bold text-white mb-2">{role.label}</h3>
               {role.disabled ? (
                 <span className="inline-block px-3 py-1 rounded-full border border-zinc-600 text-zinc-500 text-xs font-bold uppercase tracking-wider">
                   오픈 예정

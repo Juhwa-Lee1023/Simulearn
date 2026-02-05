@@ -23,18 +23,18 @@ export function DifficultySelection() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-full w-full bg-zinc-950 p-8 text-white overflow-y-auto">
+    <div className="flex flex-col items-center justify-center h-full w-full bg-zinc-950 p-4 md:p-8 text-white overflow-y-auto">
       <div className="max-w-2xl w-full flex flex-col h-full justify-center">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-12 text-center space-y-4 shrink-0"
+          className="mb-8 md:mb-12 text-center space-y-4 shrink-0"
         >
           <span className="inline-block px-3 py-1 rounded-full border border-zinc-700 text-zinc-400 text-xs font-bold uppercase tracking-wider">
             시뮬레이션
           </span>
-          <h1 className="text-5xl font-bold">미션 난이도</h1>
-          <p className="text-base text-zinc-400 max-w-xl mx-auto break-keep">
+          <h1 className="text-3xl md:text-5xl font-bold">미션 난이도</h1>
+          <p className="text-sm md:text-base text-zinc-400 max-w-xl mx-auto break-keep">
             난이도를 선택하면 미션 화면으로 이동합니다.
           </p>
         </motion.div>
@@ -43,7 +43,7 @@ export function DifficultySelection() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.1 }}
-          className="flex flex-col sm:flex-row flex-nowrap justify-center gap-6 sm:gap-8 mb-16 shrink-0"
+          className="flex flex-col sm:flex-row flex-nowrap justify-center gap-4 sm:gap-8 mb-8 md:mb-16 shrink-0"
         >
           {difficulties.map((d) => {
             const isSelected = missionDifficulty === d.id;
@@ -62,11 +62,11 @@ export function DifficultySelection() {
                 `}
               >
                 <div className="mb-1.5">
-                  <span className={`font-bold text-lg ${isSelected ? 'text-gray-900' : 'text-zinc-200'}`}>
+                  <span className={`font-bold text-base md:text-lg ${isSelected ? 'text-gray-900' : 'text-zinc-200'}`}>
                     {d.label}
                   </span>
                 </div>
-                <span className={`text-sm leading-snug ${isSelected ? 'text-gray-600' : 'text-zinc-500'}`}>
+                <span className={`text-xs md:text-sm leading-snug ${isSelected ? 'text-gray-600' : 'text-zinc-500'}`}>
                   {d.desc}
                 </span>
               </button>

@@ -40,21 +40,21 @@ export function Completion() {
   const { resetSimulation } = useSimulation();
 
   return (
-    <div className="flex flex-col items-center justify-center h-full w-full bg-white p-8 overflow-y-auto">
+    <div className="flex flex-col items-center justify-center h-full w-full bg-white p-4 md:p-8 overflow-y-auto">
       <div className="max-w-4xl w-full text-center flex flex-col h-full justify-center">
         <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mb-12 shrink-0"
+            className="mb-8 md:mb-12 shrink-0"
         >
-            <h1 className="text-5xl font-bold text-gray-900 mb-4">시뮬레이션 완료</h1>
-            <p className="text-xl text-gray-500 break-keep">
+            <h1 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">시뮬레이션 완료</h1>
+            <p className="text-base md:text-xl text-gray-500 break-keep">
                 축하합니다! 성공적으로 프로덕트 기획 과정을 경험하셨습니다.<br/>
                 이제 더 넓은 세상으로 나아갈 준비가 되셨나요?
             </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 shrink-0">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-8 md:mb-12 shrink-0">
             {cards.map((c, i) => (
                 <motion.div 
                     key={c.title}
@@ -66,15 +66,15 @@ export function Completion() {
                     <a href={c.href} target="_blank" rel="noopener noreferrer" className="w-full text-left h-full group block">
                         <Card className="h-full hover:shadow-xl transition-all border-gray-200 group-hover:border-gray-400 flex flex-col p-6">
                             <div 
-                                className="w-14 h-14 rounded-xl flex items-center justify-center mb-6"
+                                className="w-12 h-12 md:w-14 md:h-14 rounded-xl flex items-center justify-center mb-4 md:mb-6"
                                 style={{ backgroundColor: c.iconBg, color: c.iconColor }}
                             >
-                                <c.icon className="w-7 h-7" />
+                                <c.icon className="w-6 h-6 md:w-7 md:h-7" />
                             </div>
-                            <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+                            <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
                                 {c.title}
                             </h3>
-                            <p className="text-gray-500 break-keep">
+                            <p className="text-sm md:text-base text-gray-500 break-keep">
                                 {c.desc}
                             </p>
                         </Card>

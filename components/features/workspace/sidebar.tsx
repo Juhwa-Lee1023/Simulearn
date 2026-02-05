@@ -40,7 +40,7 @@ export function Sidebar() {
   }, [helpTip]);
 
   return (
-    <div className="w-72 flex flex-col gap-4 h-full bg-white border-l border-gray-200 p-4">
+    <div className="w-full md:w-72 flex flex-col gap-4 h-full bg-white md:border-l border-gray-200 p-4">
       <div className="mb-4">
         <motion.div
           whileHover={{ scale: 1.02 }}

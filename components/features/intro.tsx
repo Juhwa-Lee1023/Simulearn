@@ -39,18 +39,18 @@ export function Intro() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-full w-full bg-zinc-950 p-8 text-white overflow-y-auto">
+    <div className="flex flex-col items-center justify-center h-full w-full bg-zinc-950 p-4 md:p-8 text-white overflow-y-auto">
       <div className="max-w-6xl w-full flex flex-col h-full justify-center">
         <motion.div 
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mb-12 text-center space-y-4 shrink-0"
+            className="mb-8 md:mb-12 text-center space-y-4 shrink-0"
         >
           <span className="inline-block px-3 py-1 rounded-full border border-zinc-700 text-zinc-400 text-xs font-bold uppercase tracking-wider">
             역할: 서비스 기획자
           </span>
-          <h1 className="text-5xl font-bold">당신의 미션</h1>
-          <p className="text-base text-zinc-400 max-w-2xl mx-auto break-keep leading-relaxed">
+          <h1 className="text-3xl md:text-5xl font-bold">당신의 미션</h1>
+          <p className="text-sm md:text-base text-zinc-400 max-w-2xl mx-auto break-keep leading-relaxed">
             두쫀쿠가 다 떨어지는 시점에 매진 임박 매장을 더 강조하는 기능을 기획하세요.
             팀원들과 협업하여 예외 상황을 처리하고 완성도 높은 기획안(PRD)을 만들어야 합니다.
           </p>
@@ -62,10 +62,10 @@ export function Intro() {
           variants={container}
           initial="hidden"
           animate="show"
-          className="flex flex-row flex-nowrap justify-center items-stretch gap-4 mb-16 shrink-0"
+          className="flex flex-col sm:flex-row flex-wrap justify-center items-stretch gap-4 mb-8 md:mb-16 shrink-0"
         >
           {team.map((persona) => (
-            <motion.div key={persona.id} variants={item} className="flex-1 min-w-0 basis-0">
+            <motion.div key={persona.id} variants={item} className="flex-1 min-w-[200px] basis-0">
               <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-4 flex flex-col items-center text-center hover:bg-zinc-800 hover:border-zinc-700 transition-all shadow-lg shadow-black/20">
                 <div className="w-14 h-14 rounded-full overflow-hidden mb-3 border-2 border-zinc-700 grayscale hover:grayscale-0 transition-all ring-2 ring-zinc-800/50 shrink-0">
                   <ImageWithFallback 

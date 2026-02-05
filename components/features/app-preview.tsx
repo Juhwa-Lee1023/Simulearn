@@ -28,15 +28,15 @@ export function AppPreview() {
   const router = useRouter();
 
   return (
-    <div className="flex flex-col items-center justify-center h-full w-full bg-white p-8 overflow-y-auto">
+    <div className="flex flex-col items-center justify-center h-full w-full bg-white p-4 md:p-8 overflow-y-auto">
       <div className="max-w-2xl w-full flex flex-col h-full justify-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-8 text-center shrink-0"
+          className="mb-6 md:mb-8 text-center shrink-0"
         >
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">당신의 기획안으로 만든 앱</h1>
-          <p className="text-gray-500 break-keep">
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">당신의 기획안으로 만든 앱</h1>
+          <p className="text-sm md:text-base text-gray-500 break-keep">
             팀이 기획안을 반영해 구현한, 두쫀쿠 소진 시점에 매진 임박 매장을 강조하는 화면입니다.
           </p>
         </motion.div>
@@ -46,7 +46,7 @@ export function AppPreview() {
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.1 }}
-          className="rounded-2xl border-2 border-gray-200 shadow-xl overflow-hidden bg-white shrink-0 mb-12"
+          className="rounded-2xl border-2 border-gray-200 shadow-xl overflow-hidden bg-white shrink-0 mb-8 md:mb-12"
         >
           {/* App header */}
           <div className="bg-gray-50 border-b border-gray-200 px-4 py-3 flex items-center gap-2">
